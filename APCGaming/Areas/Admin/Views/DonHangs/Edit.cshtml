@@ -1,0 +1,70 @@
+﻿@model APCGaming.Models.DonHang
+
+@{
+    ViewData["Title"] = "Chỉnh sửa đơn hàng #" + Model.DonHangId;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    List<ChiTietDonHang> chiTietDonHangs = ViewBag.ChiTiet;
+}
+
+<div class="page-header">
+    <h2 class="header-title"></h2>
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="DonHangs" asp-action="Home" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
+            <a class="breadcrumb-item" asp-area="Admin" asp-controller="DonHangs" asp-action="Index">Danh sách đơn hàng</a>
+            <span class="breadcrumb-item active">Chỉnh sửa đơn hàng @Model.DonHangId</span>
+        </nav>
+    </div>
+</div>
+<form asp-controller="DonHangs" asp-action="Edit" asp-route-id="@Model.DonHangId" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="DonHangId" />
+    <input type="hidden" asp-for="NgayTao" />
+    <input type="hidden" asp-for="TongTien" />
+    <input type="hidden" asp-for="KhachHangId" />
+    <div class="page-header no-gutters has-tab">
+        <div class="d-md-flex m-b-15 align-items-center justify-content-between">
+            <div class="m-b-15">
+                <button class="btn btn-primary">
+                    <i class="anticon anticon-save"></i>
+                    <span>Lưu đơn hàng</span>
+                </button>
+            </div>
+        </div>
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#product-edit-basic">Thông tin cơ bản</a>
+            </li>
+        </ul>
+    </div>
+    <div class="tab-content m-t-15">
+        <div class="tab-pane fade show active" id="product-edit-basic">
+            <div class="card">
+                <div class="card-body">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group">
+                        <label class="control-label">Trạng thái thanh toán(true/false)</label>
+                        <input asp-for="TrangThaiThanhToan" class="form-control" />
+                        <span asp-validation-for="TrangThaiThanhToan" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="font-weight-semibold" for="productFit">Ghi chú</label>
+                        <input type="text" class="form-control" asp-for="GhiChu">
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label class="font-weight-semibold" for="productCategory">Trạng thái đơn hàng</label>
+                            <select class="custom-select" asp-for="TrangThaiDonHangId" style="min-width: 200px;" asp-items="ViewBag.TrangThaiDonHang">
+                                <option value="" disabled selected>Chọn Trạng thái đơn hàng</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+

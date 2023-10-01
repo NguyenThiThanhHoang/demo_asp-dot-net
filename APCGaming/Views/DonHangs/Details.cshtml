@@ -1,0 +1,35 @@
+﻿@model APCGaming.ModelViews.XemDonHang
+@{
+    var total = Model.DonHang.TongTien.Value.ToString("#,##0");
+}
+<h3>Thông tin đơn hàng: #@Model.DonHang.DonHangId</h3>
+<br />
+<p>Ngày đặt hàng: @Model.DonHang.NgayTao</p>
+<p>Trạng thái đơn hàng: @Model.DonHang.TrangThaiDonHang.Ten</p>
+<p>Tổng giá trị đơn hàng: <strong> @total VNĐ</strong></p>
+<p>Ngày thanh toán: @Model.DonHang.NgayThanhToan</p>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <tbody>
+            <tr>
+                <th>#</th>
+                <th>Sản phẩm</th>
+                <th>Số lượng</th>
+                <th>Đơn giá</th>
+                <th>Thành tiền</th>
+            </tr>
+
+            @foreach (var item in Model.ChiTietDonHang)
+            {
+                <tr>
+                    <td>@item.SanPhamId</td>
+                    <td>@item.SanPham.TenSp</td>
+                    <td>@item.SoLuong</td>
+                    <td>@item.SanPham.GiaTien</td>
+                    <td>@total VNĐ</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

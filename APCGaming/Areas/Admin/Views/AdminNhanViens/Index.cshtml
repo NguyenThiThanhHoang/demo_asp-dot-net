@@ -1,0 +1,102 @@
+﻿@using PagedList.Core.Mvc
+@model IEnumerable<APCGaming.Models.NhanVien>
+
+@{
+    ViewData["Title"] = "Danh sách nhân viên và tài khoản quản trị";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <span class="breadcrumb-item active">Danh sách nhân viên và tài khoản</span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="row m-b-30">
+            <div class="col-lg-12">
+                <div class="d-md-flex">
+                    <div class="m-b-10 m-r-15">
+                        <select class="custom-select" id="idChucVu" name="idChucVu" style="min-width: 200px;" asp-items="ViewBag.ChucVuNhanVien">
+                            <option value="0" disabled selected>Chọn quyền nhân viên</option>
+                        </select>
+                    </div>
+                    <div class="m-b-10">
+                        <select class="custom-select" id="idTrangThai" name="idTrangThai" style="min-width: 200px;" asp-items="ViewBag.lsTrangThai">
+                            <option value="" disabled selected>Chọn trạng thái</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover e-commerce-table">
+                <thead>
+                    <tr>
+                        <th>Tài Khoản/ID</th>
+                        <th>Họ nhân viên</th>
+                        <th>Tên nhân viên</th>
+                        <th>SĐT</th>
+                        <th>Email</th>
+                        <th>Chức vụ</th>
+                        <th>Trạng thái</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.TaiKhoanId</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img class="img-fluid rounded" src="assets/images/others/thumb-9.jpg" style="max-width: 60px" alt="">
+                                        <h6 class="m-b-0 m-l-10">@item.HoNv</h6>
+                                    </div>
+                                </td>
+                                <td>@item.TenNv</td>
+                                <td>@item.Sđt</td>
+                                <td>@item.Email</td>
+                                <td>@item.ChucVu.MoTa</td>
+                                <td>
+                                    @if (item.TrangThai)
+                                    {
+                                        <div class="d-flex align-items-center">
+                                            <div class="badge badge-success badge-dot m-r-10"></div>
+                                            <div>Active</div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="d-flex align-items-center">
+                                            <div class="badge badge-danger badge-dot m-r-10"></div>
+                                            <div>Block</div>
+                                        </div>
+                                    }
+                                </td>
+                                <td class="text-right">
+                                    <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminNhanViens"
+                                       asp-action="Details" asp-route-id="@item.TaiKhoanId">View</a>
+                                    <a class="btn btn-secondary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminNhanViens"
+                                       asp-action="Edit" asp-route-id="@item.TaiKhoanId">Edit</a>
+                                    <a class="btn btn-success btn-tone m-r-5" asp-area="Admin" asp-controller="AdminNhanViens"
+                                       asp-action="Delete" asp-route-id="@item.TaiKhoanId">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

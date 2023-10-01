@@ -1,0 +1,119 @@
+﻿@using PagedList.Core.Mvc
+@model PagedList.Core.IPagedList<APCGaming.Models.SanPham>
+
+@{
+    int PageCurrent = ViewBag.CurrentPage;
+    DanhMuc danhMuc = ViewBag.CurrentDanhMuc;
+    int PageNext = PageCurrent + 1;
+    ViewData["Title"] = danhMuc.TenDanhMuc + " " + PageCurrent;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Begin Main Content Area -->
+<main class="main-content">
+    <div class="breadcrumb-area breadcrumb-height" data-bg-image="assets/images/breadcrumb/bg/1-1-1920x373.jpg">
+        <div class="container h-100">
+            <div class="row h-100">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-item">
+                        <h1 class="breadcrumb-heading">@danhMuc.TenDanhMuc</h1>
+                        <ul>
+                            <li>
+                                <a href="/">Trang chủ<i class="pe-7s-angle-right"></i></a>
+                            </li>
+                            <li>@danhMuc.TenDanhMuc</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="shop-area section-space-y-axis-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="tab-content text-charcoal pt-8">
+                        <div class="tab-pane fade show active" id="grid-view" role="tabpanel" aria-labelledby="grid-view-tab">
+                            <div class="product-grid-view row">
+                                @if (Model != null && Model.Count() > 0)
+                                {
+                                    foreach (var item in Model)
+                                    {
+                                        string url = $"/san-pham/{item.SanPhamId}";
+                                        <div class="col-lg-3 col-sm-6">
+                                            <div class="product-item">
+                                                <div class="product-img img-zoom-effect">
+                                                    <a href="@url">
+                                                        <img class="img-full" src="~/images/sanPhams/@item.Avatar" alt="@item.TenSp">
+                                                    </a>
+                                                </div>
+                                                <div class="product-content">
+                                                    <a class="product-name" href="@url">@item.TenSp</a>
+                                                    <div class="price-box pb-1">
+                                                        <span class="new-price">@item.GiaTien.ToString("#,##0") VNĐ</span>
+                                                    </div>
+                                                    <div class="rating-box">
+                                                        <ul>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="list-view" role="tabpanel" aria-labelledby="list-view-tab">
+                            <div class="product-list-view row">
+                                @if (Model != null && Model.Count() > 0)
+                                {
+                                    foreach (var item in Model)
+                                    {
+                                        string url = $"/san-pham/{item.SanPhamId}";
+                                        string moTaNgan = item.MoTa.Substring(0, 200);
+                                        <div class="col-12 pt-6">
+                                            <div class="product-item">
+                                                <div class="product-img img-zoom-effect">
+                                                    <a href="@url">
+                                                        <img class="img-full" src="~/images/sanPhams/@item.Avatar" alt="@item.TenSp">
+                                                    </a>
+                                                </div>
+                                                <div class="product-content align-self-center">
+                                                    <a class="product-name pb-2" href="@url">@item.TenSp</a>
+                                                    <div class="price-box pb-1">
+                                                        <span class="new-price">@item.GiaTien.ToString("#,##0") VNĐ</span>
+                                                    </div>
+                                                    <div class="rating-box pb-2">
+                                                        <ul>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                            <li><i class="pe-7s-star"></i></li>
+                                                        </ul>
+                                                    </div>
+                                                    <p class="short-desc mb-0">@moTaNgan ...</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pagination-area pt-10">
+                        <ul class="pagination justify-content-center">
+                            <pager class="pager-container" list="@Model" options="@PagedListRenderOptions.Bootstrap4PageNumbersOnly" asp-area="" asp-controller="SanPham" asp-route-id="@danhMuc.DanhMucId" asp-action="List" />
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- Main Content Area End Here -->

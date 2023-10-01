@@ -1,0 +1,65 @@
+﻿@model APCGaming.Models.Trang
+
+@{
+    ViewData["Title"] = "Thông tin trang" + Model.TenTrang;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
+            <a asp-area="Admin" asp-controller="AdminTrangs" asp-action="Index" class="breadcrumb-item">Danh sách Page</a>
+            <span class="breadcrumb-item active">Thông tin Page : @Model.TenTrang</span>
+        </nav>
+    </div>
+</div>
+
+<div class="page-header no-gutters has-tab">
+    <div class="d-md-flex m-b-15 align-items-center justify-content-between">
+        <div class="media align-items-center m-b-15">
+            <div class="avatar avatar-image rounded" style="height:70px; width:70px">
+                <img src="~/images/trangs/@Model.HinhAnh" alt="@Model.TieuDe" />
+            </div>
+            <div class="m-l-15">
+                <h4 class="m-b-0">@Model.TenTrang</h4>
+                <p class="text-muted m-b-0"> ID: #@Model.TrangId</p>
+            </div>
+        </div>
+        <div class="m-b-15">
+            <a class="btn btn-primary" asp-area="Admin" asp-controller="AdminTrangs" asp-action="Edit" asp-route-id="@Model.TrangId">Edit</a>
+        </div>
+    </div>
+</div>
+
+<div>
+    <h4>Trang</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NoiDung)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NoiDung)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.HinhAnh)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TrangThai)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TieuDe)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TieuDe)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NgayTao)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NgayTao)
+        </dd>
+    </dl>
+</div>
+

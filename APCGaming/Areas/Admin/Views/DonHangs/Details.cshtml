@@ -1,0 +1,96 @@
+﻿@model APCGaming.Models.DonHang
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    List<ChiTietDonHang> chiTietDonHangs = ViewBag.ChiTiet;
+}
+
+<div class="page-header">
+    <h2 class="header-title"></h2>
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="DonHangs" asp-action="Home" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Trang chủ</a>
+            <a class="breadcrumb-item" asp-area="Admin" asp-controller="DonHangs" asp-action="Index">Danh sách đơn hàng</a>
+            <span class="breadcrumb-item active">Chi tiết đơn hàng @Model.DonHangId @Model.KhachHang.HoKh @Model.KhachHang.TenKh</span>
+        </nav>
+    </div>
+</div>
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <div id="invoice" class="p-h-30">
+                <div class="row m-t-20 lh-2">
+                    <div class="col-sm-6">
+                        <h3 class="p-l-10 m-t-10">THÔNG TIN ĐƠN HÀNG:</h3>
+                        <address class="p-l-10 m-t-10">
+                            <span class="font-weight-semibold text-dark">Họ và Tên: @Model.KhachHang.HoKh @Model.KhachHang.TenKh</span><br>
+                            <span>Email: @Model.KhachHang.Email</span><br>
+                            <span>Số điện thoại: @Model.KhachHang.Sđt</span>
+                        </address>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="m-t-80">
+                            <div class="text-dark text-uppercase d-inline-block">
+                                <span class="font-weight-semibold text-dark">Mã đơn hàng :</span>
+                            </div>
+                            <div class="float-right">#@Model.DonHangId</div>
+                        </div>
+                        <div class="text-dark text-uppercase d-inline-block">
+                            <span class="font-weight-semibold text-dark">Ngày đặt hàng :</span>
+                        </div>
+                        <div class="float-right">@Model.NgayTao</div>
+                        <br />
+                        <div class="text-dark text-uppercase d-inline-block">
+                            <span class="font-weight-semibold text-dark">Ngày thanh toán :</span>
+                        </div>
+                        <div class="float-right">@Model.NgayThanhToan</div>
+                        <br />
+                        <div class="text-dark text-uppercase d-inline-block">
+                            <span class="font-weight-semibold text-dark">Tổng tiền :</span>
+                        </div>
+                        <div class="float-right">@Model.TongTien.Value.ToString("#,##0") VNĐ</div>
+                        <br />
+                        <div class="text-dark text-uppercase d-inline-block">
+                            <span class="font-weight-semibold text-dark">Trạng thái đơn hàng :</span>
+                        </div>
+                        <div class="float-right">@Model.TrangThaiDonHang.Ten</div>
+                    </div>
+                </div>
+                <div class="m-t-20">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Mã sản phẩm</th>
+                                    <th>Sản phẩm</th>
+                                    <th>Số lượng</th>
+                                    <th>Giá tiền</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (chiTietDonHangs != null && chiTietDonHangs.Count() > 0)
+                                {
+                                    int i = 1;
+                                    foreach (var item in chiTietDonHangs)
+                                    {
+                                        <tr>
+                                            <th>@i</th>
+                                            <td>@item.SanPham.SanPhamId</td>
+                                            <td>@item.SanPham.TenSp</td>
+                                            <td>@item.SoLuong</td>
+                                            <td>@item.GiaTien.ToString("#,##0") VNĐ</td>
+                                        </tr>
+                                        i++;
+                                    }
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,41 @@
+﻿@model APCGaming.Models.DanhMuc
+
+@{
+    ViewData["Title"] = "Tạo mới danh mục";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <span class="breadcrumb-item active">Tạo mới danh mục</span>
+        </nav>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TenDanhMuc" class="control-label"></label>
+                <input asp-for="TenDanhMuc" class="form-control" />
+                <span asp-validation-for="TenDanhMuc" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="TrangThai" /> @Html.DisplayNameFor(model => model.TrangThai)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

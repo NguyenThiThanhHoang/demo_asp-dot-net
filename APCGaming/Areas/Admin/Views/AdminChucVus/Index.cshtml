@@ -1,0 +1,44 @@
+﻿@model IEnumerable<APCGaming.Models.ChucVu>
+
+@{
+    ViewData["Title"] = "Quản lý quyền truy cập";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<p>
+    <a asp-action="Create">Tạo mới chức vụ</a>
+</p>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Tên chức vụ</th>
+                <th scope="col">Mô tả</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <th scope="row">@item.ChucVuId</th>
+                        <td>@item.TenChucVu</td>
+                        <td>@item.MoTa</td>
+                        <td>
+                            <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminChucVus" 
+                               asp-action="Details" asp-route-id="@item.ChucVuId">View</a>
+                            <a class="btn btn-secondary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminChucVus" 
+                               asp-action="Edit" asp-route-id="@item.ChucVuId">Edit</a>
+                            <a class="btn btn-success btn-tone m-r-5" asp-area="Admin" asp-controller="AdminChucVus" 
+                               asp-action="Delete" asp-route-id="@item.ChucVuId">Delete</a>
+                        </td>
+                    </tr>
+                }
+            }
+
+        </tbody>
+    </table>
+</div>
+

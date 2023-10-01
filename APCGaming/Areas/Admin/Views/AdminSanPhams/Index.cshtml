@@ -1,0 +1,130 @@
+﻿@using PagedList.Core.Mvc
+@model PagedList.Core.IPagedList<APCGaming.Models.SanPham>
+@{
+    int CurrentPage = ViewBag.CurrentPage;
+    ViewData["Title"] = "Danh sách sản phẩm" + CurrentPage;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <span class="breadcrumb-item active">Danh sách sản phẩm : page @CurrentPage</span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="row m-b-30">
+            <div class="col-lg-6">
+                <div class="input-affix m-v-10">
+                    <select class="custom-select" id="txtDanhMucID" name="DanhMucID" style="min-width: 200px;" asp-items="ViewBag.DanhMuc">
+                        <option selected>Chọn danh mục</option>
+                        <option value="0">Tất cả</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-4 text-right">
+                <a class="btn btn-primary" asp-controller="AdminSanPhams" asp-action="Create">
+                    <i class="anticon anticon-plus-circle m-r-5"></i><span>Tạo sản phẩm</span>
+                </a>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover e-commerce-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Danh mục</th>
+                        <th>Giá</th>
+                        <th>Số lượng</th>
+                        <th>Trạng thái</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.SanPhamId</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img class="img-fluid rounded" src="assets/images/others/thumb-9.jpg" style="max-width: 60px" alt="">
+                                        <h6 class="m-b-0 m-l-10">@item.TenSp</h6>
+                                    </div>
+                                </td>
+                                <td>@item.DanhMuc.TenDanhMuc</td>
+                                <td>@item.GiaTien.ToString("#,##0") VNĐ</td>
+                                <td>@item.SoLuong</td>
+                                <td>
+                                    @if (item.TrangThai)
+                                    {
+                                        <div class="d-flex align-items-center">
+                                            <div class="badge badge-success badge-dot m-r-10"></div>
+                                            <div>Còn bán</div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="d-flex align-items-center">
+                                            <div class="badge badge-danger badge-dot m-r-10"></div>
+                                            <div>Ngưng bán</div>
+                                        </div>
+                                    }
+
+                                </td>
+                                <td class="text-right">
+                                    <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminSanPhams"
+                                       asp-action="Details" asp-route-id="@item.SanPhamId">View</a>
+                                    <a class="btn btn-secondary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminSanPhams"
+                                       asp-action="Edit" asp-route-id="@item.SanPhamId">Edit</a>
+                                    <a class="btn btn-success btn-tone m-r-5" asp-area="Admin" asp-controller="AdminSanPhams"
+                                       asp-action="Delete" asp-route-id="@item.SanPhamId">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+            <div aria-label="Page navigation example">
+                <ul class="pagination">
+                    <pager class="pager-container" list="@Model" asp-area="Admin" asp-controller="AdminSanPhams" asp-route-DanhMucID="ViewBag.CurrentDanhMucID" asp-action="Index"></pager>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+    $(document).ready(function () {
+        jQuery("#txtDanhMucID").change(function () {
+            var DanhMucID = jQuery(this).children(":selected").attr("value");
+            DanhMucID = parseFloat(DanhMucID);
+            $('#txtDanhMucID option')
+                .removeAttr('selected');
+            $("#txtDanhMucID > [value=" + DanhMucID + "]").attr("selected", "true");
+            $.ajax({
+                url: '/Admin/AdminSanPhams/Filtter',
+                datatype: "json",
+                type: "GET",
+                data: {
+                    DanhMucID: DanhMucID
+                },
+                async: true,
+                success: function (results) {
+                    if (results.status == "success") {
+                        window.location.href = results.redirectUrl;
+                    }
+                },
+                error: function (xhr) {
+                    alert('error');
+                }
+            });
+        });
+    });
+    </script>
+}

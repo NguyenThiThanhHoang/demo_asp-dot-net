@@ -1,0 +1,80 @@
+﻿@model APCGaming.Models.NhanVien
+
+@{
+    ViewData["Title"] = "Thông tin nhân viên" + Model.HoNv + " " + Model.TenNv;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <span class="breadcrumb-item active">Thông tin nhân viên</span>
+        </nav>
+    </div>
+</div>
+
+<div>
+    <h4>NhanVien</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TenNv)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TenNv)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HoNv)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HoNv)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Sđt)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Sđt)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ChuoiMaHoaMk)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ChuoiMaHoaMk)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MatKhau)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MatKhau)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TrangThai)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TrangThai)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NgayVaoLam)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NgayVaoLam)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ChucVu)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ChucVu.TenChucVu)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.TaiKhoanId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

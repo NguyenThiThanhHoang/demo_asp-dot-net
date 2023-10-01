@@ -1,0 +1,76 @@
+﻿@using PagedList.Core.Mvc
+@model PagedList.Core.IPagedList<APCGaming.Models.TinTuc>
+@{
+    int CurrentPage = ViewBag.CurrentPage;
+    ViewData["Title"] = "Danh sách tin tức" + CurrentPage;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <span class="breadcrumb-item active">Danh sách tin tức : page @CurrentPage</span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover e-commerce-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tiêu đề</th>
+                        <th>Trạng thái</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.TinTucId</td>
+                                <td>@item.TieuDe</td>
+                                <td>
+                                    @if (item.TrangThai == true)
+                                    {
+                                        <div class="d-flex align-items-center">
+                                            <div class="badge badge-success badge-dot m-r-10"></div>
+                                            <div>Công khai</div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="d-flex align-items-center">
+                                            <div class="badge badge-danger badge-dot m-r-10"></div>
+                                            <div>Riêng tư</div>
+                                        </div>
+                                    }
+                                </td>
+                                <td class="text-right">
+                                    <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminTinTucs"
+                                       asp-action="Details" asp-route-id="@item.TinTucId">View</a>
+                                    <a class="btn btn-secondary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminTinTucs"
+                                       asp-action="Edit" asp-route-id="@item.TinTucId">Edit</a>
+                                    <a class="btn btn-success btn-tone m-r-5" asp-area="Admin" asp-controller="AdminTinTucs"
+                                       asp-action="Delete" asp-route-id="@item.TinTucId">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+            <div aria-label="Page navigation example">
+                <ul class="pagination">
+                    <pager class="pager-container" list="@Model" asp-area="Admin" asp-controller="AdminTinTucs" asp-action="Index"></pager>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

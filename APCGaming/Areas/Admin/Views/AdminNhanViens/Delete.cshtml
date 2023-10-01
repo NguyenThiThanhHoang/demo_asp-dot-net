@@ -1,0 +1,76 @@
+﻿@model APCGaming.Models.NhanVien
+
+@{
+    ViewData["Title"] = "Xác nhận xóa nhân viên" + Model.HoNv + Model.TenNv;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Delete</h1>
+
+<h3>Xác nhận xóa nhân viên</h3>
+<div>
+    <h4>NhanVien</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TenNv)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TenNv)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HoNv)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HoNv)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Sđt)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Sđt)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ChuoiMaHoaMk)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ChuoiMaHoaMk)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MatKhau)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MatKhau)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TrangThai)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TrangThai)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NgayVaoLam)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NgayVaoLam)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ChucVu)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ChucVu.TenChucVu)
+        </dd class>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="TaiKhoanId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

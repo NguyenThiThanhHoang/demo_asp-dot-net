@@ -1,0 +1,70 @@
+﻿@model APCGaming.Models.NhanVien
+
+@{
+    ViewData["Title"] = "Tạo nhân viên mới";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <span class="breadcrumb-item active">Tạo nhân viên mới</span>
+        </nav>
+    </div>
+</div>
+
+<div class="card-body">
+    <h4>Tạo nhân viên mới</h4>
+    <div class="m-t-25">
+        <form asp-controller="AdminNhanViens" asp-action="Create" method="post">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label >Họ nhân viên</label>
+                    <input type="text" class="form-control" asp-for="HoNv" placeholder="Họ và tên">
+                </div>
+                <div class="form-group col-md-6">
+                    <label >Tên nhân viên</label>
+                    <input type="text" class="form-control" asp-for="TenNv" placeholder="Họ và tên">
+                </div>
+                <div class="form-group col-md-6">
+                    <label >Số điện thoại</label>
+                    <input type="number" class="form-control" asp-for="Sđt" placeholder="Số điện thoại">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label >Email</label>
+                    <input type="email" class="form-control" asp-for="Email" placeholder="Email">
+                </div>
+                <div class="form-group col-md-6">
+                    <label >Mật khẩu</label>
+                    <input type="password" class="form-control" asp-for="MatKhau" placeholder="Mật khẩu">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="ChucVuNhanVien">Chức vụ nhân viên</label>
+                    <select class="form-control" asp-for="ChucVuId" asp-items="@ViewBag.ChucVuNhanVien" required>
+                        <option value="0" disabled selected>Chọn quyền truy cập</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="TrangThai" /> @Html.DisplayNameFor(model => model.TrangThai)
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary">Tạo mới</button>
+        </form>
+    </div>
+
+</div>
+
+
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

@@ -1,0 +1,66 @@
+﻿@model APCGaming.ModelViews.RegisterViewModel
+
+@{
+    ViewData["Title"] = "Đăng ký tài khoản";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main class="main-content">
+    <div class="login-register-area section-space-y-axis-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 pt-10 pt-lg-0">
+                    <form asp-action="DangkyTaiKhoan">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="login-form">
+                            <h4 class="login-title">Đăng ký tài khoản</h4>
+                            <div class="row">
+                                <div class="col-md-6 col-12">
+                                    <label>Họ</label>
+                                    <input asp-for="Ho" type="text" placeholder="First Name">
+                                    <span asp-validation-for="Ho" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <label>Tên</label>
+                                    <input asp-for="Ten" type="text" placeholder="Last Name">
+                                    <span asp-validation-for="Ten" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <label>Tên đăng nhập</label>
+                                    <input asp-for="TenĐN" type="text" placeholder="User Name">
+                                    <span asp-validation-for="TenĐN" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-12">
+                                    <label>Địa chỉ email</label>
+                                    <input asp-for="Email" type="email" placeholder="Email Address">
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-12">
+                                    <label>Số điện thoại</label>
+                                    <input asp-for="Phone" type="tel" placeholder="Phone number">
+                                    <span asp-validation-for="Phone" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Mật khẩu</label>
+                                    <input asp-for="Password" type="password" placeholder="Password">
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Xác nhận lại mật khẩu</label>
+                                    <input asp-for="ConfirmPassword" type="password" placeholder="Confirm Password">
+                                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                </div>
+                                <div class="col-12">
+                                    <button class="btn btn-custom-size lg-size btn-secondary btn-primary-hover rounded-0">Đăng ký</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
